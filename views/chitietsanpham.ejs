@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= sanPham.tenSanPham %> - Sweetie</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fff;
+            color: #111827;
+        }
+
+        /* HEADER */
+        .header {
+            height: 82px;
+            background: #fff;
+            border-bottom: 1px solid #f3f3f3;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-inner {
+            width: 100%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #ef2b67;
+            min-width: 220px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #fff0f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+        }
+
+        .logo-text {
+            font-size: 36px;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #111827;
+            font-size: 16px;
+        }
+
+        .menu a:hover {
+            color: #ef2b67;
+        }
+
+        .search-box {
+            margin-left: auto;
+            width: 380px;
+            height: 50px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            margin-left: 12px;
+            font-size: 16px;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            font-size: 27px;
+        }
+
+        .header-icons a {
+            color: #111;
+            text-decoration: none;
+        }
+
+        .cart-box {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ef2b67;
+            color: white;
+            font-size: 11px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+/* ================= USER MENU ================= */
+
+.user-menu {
+    position: relative;
+}
+
+.user-btn {
+    border: none;
+    background: transparent;
+
+    color: #111827;
+
+    font-size: 27px;
+
+    padding: 5px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.user-btn:hover {
+    color: #ef2b67;
+}
+
+
+/* DROPDOWN */
+.user-dropdown {
+    position: absolute;
+
+    top: 48px;
+    right: -20px;
+
+    width: 230px;
+
+    background: #fff;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 14px;
+
+    padding: 10px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0, 0, 0, 0.13);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(8px);
+
+    transition: 0.2s;
+
+    z-index: 9999;
+}
+
+
+/* Hiện menu khi rê chuột */
+.user-menu:hover .user-dropdown {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+
+/* MŨI TÊN TRÊN DROPDOWN */
+.user-dropdown::before {
+    content: "";
+
+    position: absolute;
+
+    top: -7px;
+    right: 27px;
+
+    width: 14px;
+    height: 14px;
+
+    background: white;
+
+    border-left: 1px solid #eeeeee;
+    border-top: 1px solid #eeeeee;
+
+    transform: rotate(45deg);
+}
+
+
+/* THÔNG TIN USER */
+.user-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background: #fff0f5;
+
+    color: #ef2b67;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+.user-info strong {
+    display: block;
+
+    font-size: 14px;
+
+    color: #111827;
+}
+
+.user-info small {
+    display: block;
+
+    color: #9ca3af;
+
+    margin-top: 2px;
+
+    font-size: 12px;
+}
+
+
+/* ĐƯỜNG KẺ */
+.dropdown-line {
+    height: 1px;
+
+    background: #eeeeee;
+
+    margin: 5px 0;
+}
+
+
+/* LINK TRONG DROPDOWN */
+.user-dropdown a {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 11px 12px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    color: #374151;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.user-dropdown a i {
+    width: 20px;
+
+    color: #6b7280;
+
+    text-align: center;
+}
+
+.user-dropdown a:hover {
+    background: #fff0f5;
+
+    color: #ef2b67;
+}
+
+.user-dropdown a:hover i {
+    color: #ef2b67;
+}
+        /* MAIN */
+        .main {
+            max-width: 1400px;
+            margin: auto;
+            padding: 32px 30px 80px;
+        }
+
+        .breadcrumb-custom {
+            color: #6b7280;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .breadcrumb-custom a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+
+        .breadcrumb-custom span {
+            margin: 0 10px;
+        }
+
+        .breadcrumb-current {
+            color: #ef2b67;
+        }
+
+        .product-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .image-box {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fafafa;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 575px;
+            display: block;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding-top: 8px;
+        }
+
+        .product-name {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .price {
+            color: #ef2b67;
+            font-size: 34px;
+            font-weight: 800;
+            margin-bottom: 35px;
+        }
+
+        .info-table {
+            margin-bottom: 40px;
+        }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            align-items: center;
+            margin-bottom: 18px;
+            font-size: 18px;
+        }
+
+        .info-label {
+            color: #111827;
+        }
+
+        .status {
+            display: inline-block;
+            background: #dcfce7;
+            color: #15803d;
+            padding: 7px 14px;
+            border-radius: 4px;
+        }
+
+        .description {
+            color: #6b7280;
+            line-height: 1.75;
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+
+        .quantity-row {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-control button,
+        .quantity-control input {
+            width: 60px;
+            height: 54px;
+            border: 1px solid #e5e7eb;
+            background: white;
+            text-align: center;
+            font-size: 19px;
+        }
+
+        .quantity-control button {
+            cursor: pointer;
+            font-size: 23px;
+        }
+
+        .quantity-control button:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .quantity-control button:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .quantity-control input {
+            border-left: none;
+            border-right: none;
+            outline: none;
+        }
+
+        .btn-cart {
+            width: 100%;
+            height: 72px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #f32769, #f13979);
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .btn-cart:hover {
+            opacity: 0.92;
+        }
+
+        .btn-cart i {
+            margin-right: 12px;
+        }
+
+        .product-extra {
+            margin-top: 30px;
+            padding-top: 24px;
+            border-top: 1px solid #eeeeee;
+            color: #6b7280;
+        }
+
+        .product-extra p {
+            margin-bottom: 10px;
+        }
+
+        .product-extra i {
+            width: 28px;
+            color: #ef2b67;
+        }
+
+        @media (max-width: 992px) {
+            .menu,
+            .search-box {
+                display: none;
+            }
+
+            .header-inner {
+                justify-content: space-between;
+            }
+
+            .logo {
+                min-width: auto;
+            }
+
+            .product-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image {
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .product-name {
+                font-size: 32px;
+            }
+
+            .info-row,
+            .quantity-row {
+                grid-template-columns: 130px 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-inner">
+
+        <!-- LOGO -->
+        <a href="/" class="logo">
+            <div class="logo-icon">🧁</div>
+            <div class="logo-text">Sweetie</div>
+        </a>
+
+
+        <!-- MENU -->
+        <nav class="menu">
+
+            <a href="/">
+                Trang chủ
+            </a>
+
+            <a href="/san-pham">
+                Sản phẩm
+            </a>
+
+            <a href="/danh-muc">
+                Danh mục
+            </a>
+
+            <a href="/#gioi-thieu">
+                Giới thiệu
+            </a>
+
+            <a href="/#lien-he">
+                Liên hệ
+            </a>
+
+        </nav>
+
+
+        <!-- TÌM KIẾM -->
+        <form
+            action="/san-pham"
+            method="GET"
+            class="search-box"
+        >
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                name="tuKhoa"
+                placeholder="Tìm kiếm sản phẩm..."
+            >
+
+        </form>
+
+
+        <!-- ICON -->
+        <div class="header-icons">
+
+            <!-- TÀI KHOẢN -->
+           <div class="user-menu">
+
+    <button type="button" class="user-btn">
+        <i class="fa-regular fa-user"></i>
+    </button>
+
+    <div class="user-dropdown">
+
+        <% if (nguoiDung) { %>
+
+            <div class="user-info">
+
+                <div class="user-avatar">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        <%= nguoiDung.hoTen %>
+                    </strong>
+
+                    <small>
+                        Tài khoản của tôi
+                    </small>
+                </div>
+
+            </div>
+
+            <div class="dropdown-line"></div>
+
+            <a href="/don-hang">
+                <i class="fa-solid fa-box"></i>
+                Đơn hàng của tôi
+            </a>
+
+            <a href="/dang-xuat">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Đăng xuất
+            </a>
+
+        <% } else { %>
+
+            <a href="/dang-nhap">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Đăng nhập
+            </a>
+
+            <a href="/dang-ky">
+                <i class="fa-solid fa-user-plus"></i>
+                Đăng ký
+            </a>
+
+        <% } %>
+
+    </div>
+
+</div>
+
+            <!-- GIỎ HÀNG -->
+            <a
+                href="/gio-hang"
+                class="cart-box"
+            >
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span class="cart-count">
+                    0
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+</header>
+
+<main class="main">
+
+    <div class="breadcrumb-custom">
+
+        <a href="/">Trang chủ</a>
+
+        <span>›</span>
+
+        <a href="/san-pham">Sản phẩm</a>
+
+        <span>›</span>
+
+        <span class="breadcrumb-current">
+            <%= sanPham.tenSanPham %>
+        </span>
+
+    </div>
+
+
+    <div class="product-layout">
+
+        <!-- ẢNH SẢN PHẨM -->
+
+        <div class="image-box">
+
+            <img
+                src="<%= sanPham.hinhAnh || 'https://via.placeholder.com/700x600?text=Banh+ngot' %>"
+                alt="<%= sanPham.tenSanPham %>"
+                class="product-image"
+            >
+
+        </div>
+
+
+        <!-- THÔNG TIN -->
+
+        <div class="product-info">
+
+            <h1 class="product-name">
+                <%= sanPham.tenSanPham %>
+            </h1>
+
+
+            <div class="price">
+                <%= sanPham.gia.toLocaleString("vi-VN") %>đ
+            </div>
+
+
+            <div class="info-table">
+
+                <div class="info-row">
+
+                    <div class="info-label">
+                        Danh mục:
+                    </div>
+
+                    <div>
+                        <% if (sanPham.danhMucId) { %>
+                            <%= sanPham.danhMucId.tenDanhMuc %>
+                        <% } else { %>
+                            Chưa phân loại
+                        <% } %>
+                    </div>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <div class="info-label">
+                        Trạng thái:
+                    </div>
+
+                    <div>
+                        <% if (sanPham.trangThai) { %>
+
+                            <span class="status">
+                                Còn hàng
+                            </span>
+
+                        <% } else { %>
+
+                            <span
+                                class="status"
+                                style="background:#fee2e2;color:#b91c1c;"
+                            >
+                                Hết hàng
+                            </span>
+
+                        <% } %>
+                    </div>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <div class="info-label">
+                        Mã sản phẩm:
+                    </div>
+
+                    <div>
+                        <%= sanPham.maSanPham || sanPham._id.toString().slice(-6).toUpperCase() %>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <% if (sanPham.moTa) { %>
+
+                <div class="description">
+                    <%= sanPham.moTa %>
+                </div>
+
+            <% } %>
+
+
+            <form
+                action="/gio-hang/them/<%= sanPham._id %>"
+                method="POST"
+            >
+
+                <div class="quantity-row">
+
+                    <div>
+                        Số lượng:
+                    </div>
+
+                    <div class="quantity-control">
+
+                        <button
+                            type="button"
+                            onclick="giamSoLuong()"
+                        >
+                            −
+                        </button>
+
+                        <input
+                            type="number"
+                            name="soLuong"
+                            id="soLuong"
+                            value="1"
+                            min="1"
+                            readonly
+                        >
+
+                        <button
+                            type="button"
+                            onclick="tangSoLuong()"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn-cart"
+                    <%= !sanPham.trangThai ? "disabled" : "" %>
+                >
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    <%= sanPham.trangThai
+                        ? "Thêm vào giỏ hàng"
+                        : "Sản phẩm hết hàng"
+                    %>
+
+                </button>
+
+            </form>
+
+
+            <div class="product-extra">
+
+                <p>
+                    <i class="fa-solid fa-check"></i>
+                    Bánh được làm mới mỗi ngày
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-leaf"></i>
+                    Nguyên liệu tươi ngon
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-box"></i>
+                    Đóng gói cẩn thận
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+    function tangSoLuong() {
+        const input = document.getElementById("soLuong");
+
+        input.value = parseInt(input.value) + 1;
+    }
+
+    function giamSoLuong() {
+        const input = document.getElementById("soLuong");
+
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    }
+</script>
+
+</body>
+</html>

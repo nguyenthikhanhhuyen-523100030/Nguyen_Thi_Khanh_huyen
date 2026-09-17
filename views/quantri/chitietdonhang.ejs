@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chi tiết đơn hàng - Sweetie Admin</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8f9fb;
+            color: #111827;
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #1f2631;
+            color: white;
+            padding: 25px 14px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 16px 35px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            color: #ff759b;
+        }
+
+        .logo-name {
+            font-size: 30px;
+            font-weight: 700;
+            font-style: italic;
+            color: #ff759b;
+        }
+
+        .logo-admin {
+            font-size: 18px;
+        }
+
+        .menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-item {
+            margin-bottom: 8px;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 17px 18px;
+            color: #e5e7eb;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 17px;
+        }
+
+        .menu-link i {
+            width: 28px;
+            text-align: center;
+            font-size: 21px;
+        }
+
+        .menu-link:hover,
+        .menu-link.active {
+            background: linear-gradient(90deg, #9d3767, #9f426d);
+            color: white;
+        }
+
+        .sidebar-line {
+            border-top: 1px solid #4b5563;
+            margin: 25px 10px;
+        }
+
+        .main {
+            margin-left: 280px;
+            width: calc(100% - 280px);
+        }
+
+        .topbar {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 32px;
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 17px;
+        }
+
+        .admin-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content {
+            padding: 32px 35px 60px;
+        }
+
+        .page-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+
+        .page-title {
+            font-size: 38px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .btn-back {
+            text-decoration: none;
+            border: 1px solid #d1d5db;
+            color: #111827;
+            padding: 11px 18px;
+            border-radius: 8px;
+        }
+
+        .box {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 26px;
+            margin-bottom: 25px;
+        }
+
+        .box h2 {
+            font-size: 23px;
+            font-weight: 750;
+            margin-bottom: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px 35px;
+        }
+
+        .info-item label {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .info-item div {
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status-cho {
+            background: #fff3da;
+            color: #d97706;
+        }
+
+        .status-xuly {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .status-giao {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .status-hoanthanh {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-huy {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .product-img {
+            width: 85px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .table th {
+            background: #fafafa;
+        }
+
+        .tong-tien {
+            text-align: right;
+            font-size: 26px;
+            font-weight: 800;
+            color: #ef2b67;
+            margin-top: 20px;
+        }
+
+        .btn-update {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background: linear-gradient(90deg, #f32769, #f13979);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn-update:hover {
+            color: white;
+        }
+
+        @media(max-width: 900px) {
+            .sidebar {
+                width: 220px;
+            }
+
+            .main {
+                margin-left: 220px;
+                width: calc(100% - 220px);
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">🧁</div>
+            <div class="logo-name">Sweetie</div>
+            <div class="logo-admin">Admin</div>
+        </div>
+
+        <ul class="menu">
+            <li class="menu-item">
+                <a href="/quan-tri" class="menu-link">
+                    <i class="fa-solid fa-house"></i>
+                    Tổng quan
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/quan-tri/san-pham" class="menu-link">
+                    <i class="fa-solid fa-cube"></i>
+                    Quản lý sản phẩm
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/quan-tri/danh-muc" class="menu-link">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Quản lý danh mục
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/quan-tri/don-hang" class="menu-link active">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    Quản lý đơn hàng
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-line"></div>
+
+        <ul class="menu">
+            <li class="menu-item">
+                <a href="/dang-xuat" class="menu-link">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Đăng xuất
+                </a>
+            </li>
+        </ul>
+
+    </aside>
+
+
+    <div class="main">
+
+        <div class="topbar">
+            <div class="admin-user">
+                <div class="admin-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <span>Admin</span>
+            </div>
+        </div>
+
+
+        <div class="content">
+
+            <div class="page-head">
+
+                <h1 class="page-title">
+                    Chi tiết đơn hàng
+                </h1>
+
+                <a href="/quan-tri/don-hang" class="btn-back">
+                    <i class="fa-solid fa-arrow-left me-2"></i>
+                    Quay lại
+                </a>
+
+            </div>
+
+
+            <div class="box">
+
+                <h2>Thông tin đơn hàng</h2>
+
+                <div class="info-grid">
+
+                    <div class="info-item">
+                        <label>Mã đơn hàng</label>
+                        <div>
+                            #<%= donHang._id.toString().slice(-6).toUpperCase() %>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Ngày đặt</label>
+                        <div>
+                            <%= new Date(donHang.ngayDat || donHang.createdAt).toLocaleString("vi-VN") %>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Khách hàng</label>
+                        <div><%= donHang.hoTen %></div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Số điện thoại</label>
+                        <div><%= donHang.soDienThoai %></div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Địa chỉ nhận hàng</label>
+                        <div><%= donHang.diaChi %></div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Phương thức thanh toán</label>
+                        <div>
+                            <%= donHang.phuongThucThanhToan === "COD"
+                                ? "Thanh toán khi nhận hàng"
+                                : "Chuyển khoản ngân hàng"
+                            %>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Trạng thái</label>
+
+                        <% let lop = "status-cho"; %>
+                        <% if (donHang.trangThai === "Đang xử lý") lop = "status-xuly"; %>
+                        <% if (donHang.trangThai === "Đang giao") lop = "status-giao"; %>
+                        <% if (donHang.trangThai === "Hoàn thành") lop = "status-hoanthanh"; %>
+                        <% if (donHang.trangThai === "Đã hủy") lop = "status-huy"; %>
+
+                        <div>
+                            <span class="status <%= lop %>">
+                                <%= donHang.trangThai %>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Ghi chú</label>
+                        <div>
+                            <%= donHang.ghiChu || "Không có" %>
+                        </div>
+                    </div>
+
+                </div>
+
+                <a
+                    href="/quan-tri/don-hang/sua/<%= donHang._id %>"
+                    class="btn-update"
+                >
+                    <i class="fa-solid fa-pen me-2"></i>
+                    Cập nhật trạng thái
+                </a>
+
+            </div>
+
+
+            <div class="box">
+
+                <h2>Sản phẩm trong đơn hàng</h2>
+
+                <div class="table-responsive">
+
+                    <table class="table align-middle">
+
+                        <thead>
+                            <tr>
+                                <th>Hình ảnh</th>
+                                <th>Sản phẩm</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <% chiTietDonHang.forEach(function(item) { %>
+
+                                <tr>
+
+                                    <td>
+                                        <img
+                                            src="<%= item.sanPhamId && item.sanPhamId.hinhAnh
+                                                ? item.sanPhamId.hinhAnh
+                                                : 'https://via.placeholder.com/100x80?text=Banh'
+                                            %>"
+                                            class="product-img"
+                                        >
+                                    </td>
+
+                                    <td>
+                                        <%= item.sanPhamId
+                                            ? item.sanPhamId.tenSanPham
+                                            : "Sản phẩm không còn tồn tại"
+                                        %>
+                                    </td>
+
+                                    <td>
+                                        <%= item.donGia.toLocaleString("vi-VN") %>đ
+                                    </td>
+
+                                    <td>
+                                        <%= item.soLuong %>
+                                    </td>
+
+                                    <td>
+                                        <strong>
+                                            <%= item.thanhTien.toLocaleString("vi-VN") %>đ
+                                        </strong>
+                                    </td>
+
+                                </tr>
+
+                            <% }) %>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="tong-tien">
+                    Tổng cộng:
+                    <%= donHang.tongTien.toLocaleString("vi-VN") %>đ
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Giỏ hàng - Sweetie</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fff;
+            color: #111827;
+        }
+
+        /* HEADER */
+        .header {
+            height: 82px;
+            background: #fff;
+            border-bottom: 1px solid #f3f3f3;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-inner {
+            width: 100%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #ef2b67;
+            min-width: 220px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #fff0f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+        }
+
+        .logo-text {
+            font-size: 36px;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #111827;
+            font-size: 16px;
+        }
+
+        .menu a:hover {
+            color: #ef2b67;
+        }
+
+        .search-box {
+            margin-left: auto;
+            width: 380px;
+            height: 50px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            flex: 1;
+            margin-left: 12px;
+            font-size: 16px;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            font-size: 27px;
+        }
+
+        .header-icons a {
+            text-decoration: none;
+            color: #111827;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            width: 21px;
+            height: 21px;
+            border-radius: 50%;
+            background: #ef2b67;
+            color: #fff;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* MAIN */
+        .main {
+            max-width: 1400px;
+            margin: auto;
+            padding: 55px 30px 90px;
+        }
+
+        .page-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 35px;
+        }
+
+        /* TABLE */
+        .cart-table {
+            border: 1px solid #eeeeee;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .cart-header {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr 1.2fr 1fr .7fr;
+            align-items: center;
+            min-height: 70px;
+            padding: 0 28px;
+            background: #fff5f8;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .cart-row {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr 1.2fr 1fr .7fr;
+            align-items: center;
+            min-height: 132px;
+            padding: 18px 28px;
+            border-top: 1px solid #eeeeee;
+        }
+
+        .product-box {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .product-image {
+            width: 102px;
+            height: 95px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .product-name {
+            color: #111827;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .product-name:hover {
+            color: #ef2b67;
+        }
+
+        .unit-price {
+            font-size: 17px;
+        }
+
+        .subtotal {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* QUANTITY */
+        .quantity-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn,
+        .quantity-input {
+            width: 58px;
+            height: 52px;
+            border: 1px solid #e5e7eb;
+            background: #fff;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .quantity-btn {
+            cursor: pointer;
+        }
+
+        .quantity-btn:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .quantity-btn:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .quantity-input {
+            border-left: none;
+            border-right: none;
+            outline: none;
+        }
+
+        /* DELETE */
+        .delete-form {
+            text-align: center;
+        }
+
+        .btn-delete {
+            border: none;
+            background: transparent;
+            font-size: 24px;
+            color: #111827;
+        }
+
+        .btn-delete:hover {
+            color: #ef2b67;
+        }
+
+        /* BOTTOM */
+        .cart-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 38px;
+            gap: 40px;
+        }
+
+        .btn-continue {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 285px;
+            height: 66px;
+            justify-content: center;
+            border: 1px solid #ef2b67;
+            color: #ef2b67;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .btn-continue:hover {
+            background: #fff5f8;
+            color: #ef2b67;
+        }
+
+        .summary-box {
+            width: 550px;
+        }
+
+        .summary-total {
+            background: #fff5f8;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .summary-total span:first-child {
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .summary-total span:last-child {
+            color: #ef2b67;
+            font-size: 35px;
+            font-weight: 800;
+        }
+
+        .btn-order {
+            display: block;
+            width: 100%;
+            height: 70px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #f32769, #f13979);
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            line-height: 70px;
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .btn-order:hover {
+            color: #fff;
+            opacity: .92;
+        }
+
+        /* EMPTY */
+        .empty-cart {
+            text-align: center;
+            padding: 80px 20px;
+            border: 1px solid #eeeeee;
+            border-radius: 12px;
+        }
+
+        .empty-cart i {
+            font-size: 58px;
+            color: #ef2b67;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart h3 {
+            font-weight: 700;
+        }
+
+        .empty-cart p {
+            color: #6b7280;
+        }
+
+        @media (max-width: 1000px) {
+            .menu,
+            .search-box {
+                display: none;
+            }
+
+            .header-inner {
+                justify-content: space-between;
+            }
+
+            .logo {
+                min-width: auto;
+            }
+
+            .cart-header {
+                display: none;
+            }
+
+            .cart-row {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .delete-form {
+                text-align: left;
+            }
+
+            .cart-bottom {
+                flex-direction: column;
+            }
+
+            .summary-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-inner">
+
+        <a href="/" class="logo">
+            <div class="logo-icon">🧁</div>
+            <div class="logo-text">Sweetie</div>
+        </a>
+
+        <nav class="menu">
+            <a href="/">Trang chủ</a>
+            <a href="/san-pham">Sản phẩm</a>
+            <a href="/#gioi-thieu">Giới thiệu</a>
+            <a href="/#lien-he">Liên hệ</a>
+        </nav>
+
+        <form action="/san-pham" method="GET" class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                name="tuKhoa"
+                placeholder="Tìm kiếm sản phẩm..."
+            >
+        </form>
+
+        <div class="header-icons">
+
+            <a href="/dang-nhap">
+                <i class="fa-regular fa-user"></i>
+            </a>
+
+            <a href="/gio-hang" class="cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span class="cart-count">
+                    <%= chiTiet ? chiTiet.length : 0 %>
+                </span>
+            </a>
+
+        </div>
+
+    </div>
+</header>
+
+
+<main class="main">
+
+    <h1 class="page-title">
+        Giỏ hàng của bạn
+    </h1>
+
+
+    <% if (!chiTiet || chiTiet.length === 0) { %>
+
+        <div class="empty-cart">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <h3>Giỏ hàng đang trống</h3>
+
+            <p>
+                Bạn chưa có sản phẩm nào trong giỏ hàng.
+            </p>
+
+            <a href="/san-pham" class="btn-continue">
+                <i class="fa-solid fa-arrow-left"></i>
+                Tiếp tục mua hàng
+            </a>
+
+        </div>
+
+    <% } else { %>
+
+
+        <div class="cart-table">
+
+            <div class="cart-header">
+
+                <div>Sản phẩm</div>
+                <div>Đơn giá</div>
+                <div>Số lượng</div>
+                <div>Thành tiền</div>
+                <div class="text-center">Thao tác</div>
+
+            </div>
+
+
+            <% chiTiet.forEach(function(item) { %>
+
+                <div class="cart-row">
+
+                    <!-- SẢN PHẨM -->
+                    <div class="product-box">
+
+                        <img
+                            src="<%= item.sanPhamId.hinhAnh || 'https://via.placeholder.com/200x150?text=Banh' %>"
+                            class="product-image"
+                            alt="<%= item.sanPhamId.tenSanPham %>"
+                        >
+
+                        <a
+                            href="/san-pham/<%= item.sanPhamId._id %>"
+                            class="product-name"
+                        >
+                            <%= item.sanPhamId.tenSanPham %>
+                        </a>
+
+                    </div>
+
+
+                    <!-- ĐƠN GIÁ -->
+                    <div class="unit-price">
+
+                        <%= item.donGia.toLocaleString("vi-VN") %>đ
+
+                    </div>
+
+
+                    <!-- SỐ LƯỢNG -->
+                    <form
+                        action="/gio-hang/cap-nhat/<%= item._id %>"
+                        method="POST"
+                        class="quantity-form"
+                    >
+
+                        <button
+                            type="button"
+                            class="quantity-btn"
+                            onclick="giamSoLuong(this)"
+                        >
+                            −
+                        </button>
+
+                        <input
+                            type="number"
+                            name="soLuong"
+                            value="<%= item.soLuong %>"
+                            min="1"
+                            class="quantity-input"
+                            readonly
+                        >
+
+                        <button
+                            type="button"
+                            class="quantity-btn"
+                            onclick="tangSoLuong(this)"
+                        >
+                            +
+                        </button>
+
+                    </form>
+
+
+                    <!-- THÀNH TIỀN -->
+                    <div class="subtotal">
+
+                        <%= (item.donGia * item.soLuong).toLocaleString("vi-VN") %>đ
+
+                    </div>
+
+
+                    <!-- XÓA -->
+                    <form
+                        action="/gio-hang/xoa/<%= item._id %>"
+                        method="POST"
+                        class="delete-form"
+                    >
+
+                        <button
+                            type="submit"
+                            class="btn-delete"
+                            title="Xóa sản phẩm"
+                        >
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+
+                    </form>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+
+        <div class="cart-bottom">
+
+            <a
+                href="/san-pham"
+                class="btn-continue"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+                Tiếp tục mua hàng
+            </a>
+
+
+            <div class="summary-box">
+
+                <div class="summary-total">
+
+                    <span>
+                        Tổng cộng:
+                    </span>
+
+                    <span>
+                        <%= tongTien.toLocaleString("vi-VN") %>đ
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="/dat-hang"
+                    class="btn-order"
+                >
+                    Đặt hàng
+                </a>
+
+            </div>
+
+        </div>
+
+    <% } %>
+
+</main>
+
+
+<script>
+    function tangSoLuong(button) {
+
+        const form = button.closest("form");
+
+        const input = form.querySelector(
+            'input[name="soLuong"]'
+        );
+
+        input.value =
+            parseInt(input.value) + 1;
+
+        form.submit();
+    }
+
+
+    function giamSoLuong(button) {
+
+        const form = button.closest("form");
+
+        const input = form.querySelector(
+            'input[name="soLuong"]'
+        );
+
+        if (parseInt(input.value) > 1) {
+
+            input.value =
+                parseInt(input.value) - 1;
+
+            form.submit();
+        }
+    }
+</script>
+
+</body>
+</html>

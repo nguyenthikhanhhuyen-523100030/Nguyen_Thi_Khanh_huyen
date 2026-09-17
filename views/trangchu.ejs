@@ -1,0 +1,2674 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sweetie - Tiệm bánh ngọt</title>
+
+    <!-- BOOTSTRAP -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink: #ef2b67;
+            --pink-dark: #d91f5c;
+            --pink-light: #f75b91;
+            --pink-soft: #ffe3ec;
+            --pink-bg: #fff0f5;
+            --pink-bg-light: #fff8fb;
+            --text: #111827;
+            --gray: #6b7280;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: var(--text);
+        }
+
+        /* =================================================
+           HEADER
+        ================================================= */
+
+        .header {
+            height: 82px;
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid #ffe4ed;
+
+            display: flex;
+            align-items: center;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            box-shadow: 0 3px 15px rgba(239, 43, 103, 0.04);
+        }
+
+        .header-inner {
+            width: 100%;
+            max-width: 1400px;
+
+            margin: auto;
+            padding: 0 30px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 28px;
+        }
+
+        /* LOGO */
+
+        .logo {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            text-decoration: none;
+            color: var(--pink);
+
+            min-width: 250px;
+            flex-shrink: 0;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+
+            border-radius: 50%;
+
+            background: var(--pink-bg);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 27px;
+
+            box-shadow: 0 5px 15px rgba(239, 43, 103, 0.08);
+        }
+
+        .logo-text {
+            font-size: 36px;
+            font-weight: 700;
+            font-style: italic;
+
+            color: var(--pink);
+
+            white-space: nowrap;
+        }
+
+        /* MENU */
+
+        .menu {
+            display: flex;
+            align-items: center;
+
+            gap: 28px;
+
+            flex-shrink: 0;
+        }
+
+        .menu a {
+            text-decoration: none;
+
+            color: var(--text);
+
+            font-size: 16px;
+            font-weight: 500;
+
+            position: relative;
+
+            padding: 30px 0;
+
+            white-space: nowrap;
+
+            transition: 0.2s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            color: var(--pink);
+        }
+
+        .menu a.active::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 18px;
+
+            height: 2px;
+
+            border-radius: 10px;
+
+            background: var(--pink);
+        }
+
+        /* SEARCH */
+
+        .search-box {
+            margin-left: auto;
+
+            width: 280px;
+            min-width: 230px;
+            height: 50px;
+
+            border: 1px solid #f3dce4;
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 16px;
+
+            background: #fff;
+
+            transition: 0.2s;
+        }
+
+        .search-box:focus-within {
+            border-color: #f75b91;
+
+            box-shadow:
+                0 0 0 4px rgba(239, 43, 103, 0.07);
+        }
+
+        .search-box i {
+            color: var(--pink);
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+
+            width: 100%;
+
+            margin-left: 12px;
+
+            font-size: 16px;
+
+            background: transparent;
+        }
+
+        /* HEADER ICON */
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+
+            gap: 25px;
+
+            font-size: 26px;
+        }
+
+        .header-icons a {
+            text-decoration: none;
+            color: var(--text);
+
+            transition: 0.2s;
+        }
+
+        .header-icons a:hover {
+            color: var(--pink);
+        }
+
+        /* CART */
+
+        .cart-box {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+
+            top: -10px;
+            right: -12px;
+
+            width: 21px;
+            height: 21px;
+
+            border-radius: 50%;
+
+            background: var(--pink);
+            color: #fff;
+
+            font-size: 11px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =================================================
+           USER DROPDOWN
+        ================================================= */
+
+        .user-menu {
+            position: relative;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .user-btn {
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0;
+
+            color: var(--text);
+
+            font-size: 26px;
+
+            cursor: pointer;
+
+            border-radius: 50%;
+
+            transition: 0.2s;
+        }
+
+        .user-btn:hover {
+            background: var(--pink-bg);
+            color: var(--pink);
+        }
+
+        .user-dropdown {
+            position: absolute;
+
+            top: 52px;
+            right: -15px;
+
+            width: 220px;
+
+            background: #fff;
+
+            border: 1px solid #f3dce4;
+            border-radius: 14px;
+
+            padding: 8px;
+
+            box-shadow:
+                0 15px 40px rgba(75, 30, 48, 0.13);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(8px);
+
+            transition: 0.2s;
+
+            z-index: 9999;
+        }
+
+        .user-menu:hover .user-dropdown {
+            opacity: 1;
+            visibility: visible;
+
+            transform: translateY(0);
+        }
+
+        .user-dropdown::before {
+            content: "";
+
+            position: absolute;
+
+            top: -7px;
+            right: 25px;
+
+            width: 13px;
+            height: 13px;
+
+            background: #fff;
+
+            border-left: 1px solid #f3dce4;
+            border-top: 1px solid #f3dce4;
+
+            transform: rotate(45deg);
+        }
+
+        .user-dropdown a {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 11px 12px;
+
+            color: #374151;
+
+            text-decoration: none;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            white-space: nowrap;
+
+            transition: 0.2s;
+        }
+
+        .user-dropdown a i {
+            width: 18px;
+
+            text-align: center;
+
+            color: #6b7280;
+        }
+
+        .user-dropdown a:hover {
+            background: var(--pink-bg);
+
+            color: var(--pink);
+        }
+
+        .user-dropdown a:hover i {
+            color: var(--pink);
+        }
+
+       /* =================================================
+   HERO - SWEETIE PINK
+================================================= */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 650px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 55px 0 70px;
+
+    background:
+        radial-gradient(
+            circle at 2% 10%,
+            rgba(255, 119, 164, 0.18) 0,
+            rgba(255, 119, 164, 0.18) 150px,
+            transparent 151px
+        ),
+        radial-gradient(
+            circle at 97% 85%,
+            rgba(255, 184, 208, 0.22) 0,
+            rgba(255, 184, 208, 0.22) 180px,
+            transparent 181px
+        ),
+        linear-gradient(
+            110deg,
+            #fff1f6 0%,
+            #fff8fb 48%,
+            #ffeaf2 100%
+        );
+}
+
+/* Vòng tròn trang trí */
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 360px;
+    height: 360px;
+
+    top: -230px;
+    left: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 91, 145, 0.08);
+}
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 450px;
+    height: 450px;
+
+    right: -260px;
+    bottom: -280px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 91, 145, 0.07);
+}
+
+
+/* =================================================
+   HERO CONTAINER
+================================================= */
+
+.hero-inner {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 1450px;
+
+    margin: 0 auto;
+    padding: 0 50px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 0.92fr)
+        minmax(500px, 1.08fr);
+
+    align-items: center;
+
+    gap: 75px;
+}
+
+
+/* =================================================
+   HERO LEFT
+================================================= */
+
+.hero-left {
+    width: 100%;
+    max-width: 650px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    /* Đẩy nội dung lên trên */
+    transform: translateY(-20px);
+}
+
+
+/* BADGE */
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    width: fit-content;
+
+    padding: 10px 18px;
+
+    margin-bottom: 25px;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe0eb,
+            #fff0f5
+        );
+
+    color: #ed2b68;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    box-shadow:
+        0 8px 25px
+        rgba(239, 43, 103, 0.10);
+}
+
+
+/* =================================================
+   HERO TITLE
+================================================= */
+
+.hero h1 {
+    max-width: 650px;
+
+    margin: 0 0 22px;
+
+    color: #111827;
+
+    font-size: clamp(48px, 4.4vw, 68px);
+
+    line-height: 1.08;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+}
+
+.hero h1 span {
+    display: inline-block;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f22969 0%,
+            #ff5b91 100%
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* =================================================
+   HERO DESCRIPTION
+================================================= */
+
+.hero p {
+    max-width: 600px;
+
+    margin: 0 0 30px;
+
+    color: #687386;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+}
+
+
+/* =================================================
+   HERO BUTTONS
+================================================= */
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    flex-wrap: wrap;
+}
+
+
+/* NÚT XEM SẢN PHẨM */
+
+.btn-primary-sweet {
+    min-width: 190px;
+    min-height: 56px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 14px 27px;
+
+    border: none;
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f52c6d 0%,
+            #ff568b 100%
+        );
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    box-shadow:
+        0 13px 30px
+        rgba(239, 43, 103, 0.25);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.btn-primary-sweet:hover {
+    color: #fff;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 35px
+        rgba(239, 43, 103, 0.32);
+}
+
+
+/* NÚT DANH MỤC */
+
+.btn-outline-sweet {
+    min-width: 215px;
+    min-height: 56px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 27px;
+
+    border: 2px solid #f43f7d;
+    border-radius: 14px;
+
+    background:
+        rgba(255, 255, 255, 0.72);
+
+    color: #ef2b67;
+
+    text-decoration: none;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.btn-outline-sweet:hover {
+    color: #ef2b67;
+
+    background: #fff;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 28px
+        rgba(239, 43, 103, 0.12);
+}
+
+
+/* =================================================
+   HERO RIGHT
+================================================= */
+.hero-right {
+    position: relative;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    /* Đẩy ảnh lên */
+    transform: translateY(-10px);
+}
+
+.hero-image-wrapper {
+    position: relative;
+
+    width: 100%;
+    max-width: 650px;
+
+    margin-left: auto;
+}
+
+
+/* =================================================
+   ẢNH BÁNH
+================================================= */
+
+.hero-image {
+    display: block;
+    width: 100%;
+    height: 500px;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 34px;
+    border: 7px solid rgba(255, 255, 255, 0.9);
+
+    box-shadow:
+        0 25px 60px rgba(239, 43, 103, 0.18),
+        0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.hero-image-wrapper:hover .hero-image {
+    transform:
+        translateY(-5px)
+        scale(1.008);
+
+    box-shadow:
+        0 35px 80px
+        rgba(219, 72, 123, 0.24),
+        0 12px 35px
+        rgba(69, 25, 42, 0.08);
+}
+
+
+/* =================================================
+   RATING CARD
+================================================= */
+
+.hero-card {
+    position: absolute;
+
+    left: -48px;
+    bottom: 28px;
+
+    min-width: 270px;
+
+    padding: 19px 24px;
+
+    border:
+        1px solid
+        rgba(255, 220, 233, 0.95);
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.94);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 18px 50px
+        rgba(184, 65, 108, 0.16);
+}
+
+.hero-rating {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 6px;
+}
+
+.hero-rating i {
+    color: #ffb800;
+
+    font-size: 22px;
+}
+
+.hero-rating strong {
+    color: #f22969;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.hero-card p {
+    margin: 0;
+
+    color: #253044;
+
+    font-size: 16px;
+
+    line-height: 1.4;
+}
+
+
+/* =================================================
+   CHẤM HỒNG TRANG TRÍ
+================================================= */
+
+.hero-dot {
+    position: absolute;
+
+    display: block;
+
+    border-radius: 50%;
+
+    background: #f52c6d;
+
+    pointer-events: none;
+}
+
+.hero-dot-1 {
+    width: 18px;
+    height: 18px;
+
+    right: -8px;
+    top: 35px;
+
+    opacity: 0.20;
+}
+
+.hero-dot-2 {
+    width: 11px;
+    height: 11px;
+
+    right: -36px;
+    top: 110px;
+
+    opacity: 0.16;
+}
+
+.hero-dot-3 {
+    width: 25px;
+    height: 25px;
+
+    right: 30px;
+    bottom: -25px;
+
+    opacity: 0.08;
+}
+
+
+/* =================================================
+   RESPONSIVE HERO
+================================================= */
+
+@media (max-width: 1100px) {
+
+    .hero-inner {
+        padding: 0 35px;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(430px, 1fr);
+
+        gap: 45px;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+    }
+
+    .hero-image {
+        height: 460px;
+    }
+
+    .hero-card {
+        left: -25px;
+    }
+}
+
+
+@media (max-width: 992px) {
+
+    .hero {
+        min-height: auto;
+
+        padding: 65px 0 75px;
+    }
+
+    .hero-inner {
+        display: flex;
+        flex-direction: column;
+
+        padding: 0 25px;
+
+        gap: 50px;
+
+        text-align: center;
+    }
+
+    .hero-left {
+        max-width: 750px;
+
+        align-items: center;
+    }
+
+    .hero h1 {
+        max-width: 750px;
+
+        font-size: 50px;
+    }
+
+    .hero p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-right {
+        max-width: 700px;
+
+        justify-content: center;
+    }
+
+    .hero-image-wrapper {
+        margin: 0 auto;
+    }
+
+    .hero-image {
+        height: 470px;
+    }
+
+    .hero-card {
+        left: 20px;
+        bottom: 20px;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+    .hero {
+        padding: 45px 0 55px;
+    }
+
+    .hero-inner {
+        padding: 0 18px;
+
+        gap: 38px;
+    }
+
+    .hero-badge {
+        margin-bottom: 20px;
+
+        font-size: 14px;
+    }
+
+    .hero h1 {
+        font-size: 39px;
+
+        letter-spacing: -1px;
+    }
+
+    .hero p {
+        font-size: 16px;
+
+        line-height: 1.7;
+    }
+
+    .hero-buttons {
+        width: 100%;
+
+        flex-direction: column;
+    }
+
+    .btn-primary-sweet,
+    .btn-outline-sweet {
+        width: 100%;
+    }
+
+    .hero-image {
+        height: 350px;
+
+        border-width: 5px;
+
+        border-radius: 25px;
+    }
+
+    .hero-card {
+        position: relative;
+
+        left: auto;
+        bottom: auto;
+
+        width: calc(100% - 30px);
+        min-width: 0;
+
+        margin: -45px auto 0;
+
+        text-align: left;
+    }
+
+    .hero-dot {
+        display: none;
+    }
+}
+        /* =================================================
+           SECTION CHUNG
+        ================================================= */
+
+        .section {
+            padding: 75px 0;
+        }
+
+        .section-container {
+            max-width: 1400px;
+
+            margin: auto;
+
+            padding: 0 30px;
+        }
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+        .section-title span {
+            display: inline-block;
+
+            color: var(--pink);
+
+            background: var(--pink-bg);
+
+            padding: 7px 14px;
+
+            border-radius: 30px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+
+            font-weight: 750;
+
+            margin-top: 13px;
+
+            color: var(--text);
+        }
+
+        .section-title p {
+            color: var(--gray);
+
+            font-size: 17px;
+
+            max-width: 620px;
+
+            margin: 10px auto 0;
+        }
+
+        /* =================================================
+           DANH MỤC
+        ================================================= */
+
+        .category-card {
+            height: 235px;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            position: relative;
+
+            text-decoration: none;
+
+            display: block;
+
+            border: 3px solid #fff;
+
+            box-shadow:
+                0 8px 25px
+                rgba(239, 43, 103, 0.10);
+
+            transition: 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 17px 35px
+                rgba(239, 43, 103, 0.18);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: 0.4s;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.07);
+        }
+
+        .category-overlay {
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(77, 18, 40, 0.70),
+                    rgba(239, 43, 103, 0.03)
+                );
+
+            display: flex;
+            align-items: flex-end;
+
+            padding: 22px;
+        }
+
+        .category-overlay h4 {
+            color: #fff;
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+            margin: 0;
+        }
+
+        /* =================================================
+           SẢN PHẨM
+        ================================================= */
+
+        .products-section {
+            background:
+                linear-gradient(
+                    180deg,
+                    #fff8fb 0%,
+                    #fff0f5 100%
+                );
+        }
+
+        .product-card {
+            background: #fff;
+
+            border: 1px solid #ffe2eb;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            height: 100%;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 5px 18px
+                rgba(239, 43, 103, 0.05);
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+
+            border-color: #ffc3d6;
+
+            box-shadow:
+                0 18px 38px
+                rgba(239, 43, 103, 0.13);
+        }
+
+        .product-card > a {
+            display: block;
+
+            overflow: hidden;
+        }
+
+        .product-image {
+            height: 245px;
+            width: 100%;
+
+            object-fit: cover;
+
+            transition: 0.35s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 19px;
+        }
+
+        .product-name {
+            display: block;
+
+            color: var(--text);
+
+            text-decoration: none;
+
+            font-size: 18px;
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+            transition: 0.2s;
+        }
+
+        .product-name:hover {
+            color: var(--pink);
+        }
+
+        .product-category {
+            display: inline-block;
+
+            color: var(--pink);
+
+            background: var(--pink-bg);
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            color: var(--pink);
+
+            font-size: 21px;
+            font-weight: 800;
+
+            margin-bottom: 14px;
+        }
+
+        .btn-cart {
+            width: 100%;
+            height: 46px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff2f72,
+                    #f75b91
+                );
+
+            color: #fff;
+
+            font-weight: 700;
+
+            transition: 0.25s;
+        }
+
+        .btn-cart:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(239, 43, 103, 0.25);
+        }
+
+        /* =================================================
+           ƯU ĐIỂM
+        ================================================= */
+
+        .feature-card {
+            text-align: center;
+
+            padding: 32px 20px;
+
+            border-radius: 18px;
+
+            transition: 0.25s;
+        }
+
+        .feature-card:hover {
+            background: #fff8fb;
+
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 68px;
+            height: 68px;
+
+            border-radius: 50%;
+
+            margin: 0 auto 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffe5ee,
+                    #fff0f5
+                );
+
+            color: var(--pink);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 26px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(239, 43, 103, 0.08);
+        }
+
+        .feature-card h5 {
+            font-weight: 700;
+
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+
+            margin-bottom: 0;
+        }
+
+        /* =================================================
+           GIỚI THIỆU
+        ================================================= */
+
+        .about {
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff4f8,
+                    #fffafd
+                );
+        }
+
+        .about-image {
+            width: 100%;
+            height: 420px;
+
+            border-radius: 25px;
+
+            object-fit: cover;
+
+            border: 6px solid #fff;
+
+            box-shadow:
+                0 20px 45px
+                rgba(239, 43, 103, 0.12);
+        }
+
+        .about-content {
+            padding-left: 50px;
+        }
+
+        .about-content > span {
+            display: inline-block;
+
+            color: var(--pink);
+
+            background: #ffe3ec;
+
+            padding: 7px 15px;
+
+            border-radius: 30px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            margin-bottom: 15px;
+        }
+
+        .about-content h2 {
+            font-size: 40px;
+
+            font-weight: 750;
+
+            margin-bottom: 20px;
+        }
+
+        .about-content h2 span {
+            color: var(--pink);
+        }
+
+        .about-content p {
+            color: var(--gray);
+
+            font-size: 17px;
+
+            line-height: 1.8;
+        }
+
+        /* =================================================
+           CTA
+        ================================================= */
+
+        .cta {
+            max-width: 1340px;
+
+            margin: 70px auto;
+
+            border-radius: 28px;
+
+            padding: 58px 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ef2b67,
+                    #ff6699
+                );
+
+            color: #fff;
+
+            text-align: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 45px
+                rgba(239, 43, 103, 0.20);
+        }
+
+        .cta::before {
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            top: -120px;
+            left: -80px;
+        }
+
+        .cta::after {
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            bottom: -170px;
+            right: -100px;
+        }
+
+        .cta h2,
+        .cta p,
+        .cta a {
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .cta h2 {
+            font-size: 38px;
+            font-weight: 750;
+        }
+
+        .cta p {
+            margin: 12px auto 25px;
+
+            max-width: 600px;
+        }
+
+        .cta a {
+            display: inline-block;
+
+            padding: 13px 28px;
+
+            background: #fff;
+
+            color: var(--pink);
+
+            border-radius: 12px;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .cta a:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.12);
+        }
+
+        /* =================================================
+           FOOTER
+        ================================================= */
+
+        footer {
+            background: #25131b;
+
+            color: #fff;
+
+            padding: 60px 0 25px;
+        }
+
+        footer h4,
+        footer h5 {
+            margin-bottom: 20px;
+        }
+
+        footer h4 {
+            color: #ff7ba7;
+        }
+
+        footer p,
+        footer a {
+            color: #d6c5cb;
+
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #ff7ba7;
+        }
+
+        .footer-bottom {
+            border-top:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            margin-top: 35px;
+
+            padding-top: 22px;
+
+            text-align: center;
+
+            color: #aa929b;
+        }
+
+        /* =================================================
+           RESPONSIVE
+        ================================================= */
+
+        @media (max-width: 1100px) {
+            .menu {
+                gap: 18px;
+            }
+
+            .logo {
+                min-width: 200px;
+            }
+
+            .search-box {
+                width: 240px;
+                min-width: 180px;
+            }
+        }
+
+        @media (max-width: 992px) {
+
+            .menu,
+            .search-box {
+                display: none;
+            }
+
+            .header-inner {
+                justify-content: space-between;
+            }
+
+            .logo {
+                min-width: auto;
+            }
+
+            .hero {
+                padding: 55px 0;
+            }
+
+            .hero-inner {
+                flex-direction: column;
+
+                text-align: center;
+
+                gap: 45px;
+
+                padding: 0 24px;
+            }
+
+            .hero-left,
+            .hero-right {
+                width: 100%;
+            }
+
+            .hero-left {
+                max-width: 720px;
+            }
+
+            .hero h1 {
+                font-size: 46px;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-right {
+                justify-content: center;
+            }
+
+            .hero-image {
+                height: 430px;
+            }
+
+            .hero-card {
+                left: 15px;
+                bottom: 20px;
+            }
+
+            .about-content {
+                padding-left: 0;
+
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            .header-inner {
+                padding: 0 18px;
+            }
+
+            .logo-text {
+                font-size: 29px;
+            }
+
+            .logo-icon {
+                width: 44px;
+                height: 44px;
+            }
+
+            .header-icons {
+                gap: 17px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary-sweet,
+            .btn-outline-sweet {
+                width: 100%;
+            }
+
+            .hero-image {
+                height: 340px;
+
+                border-radius: 22px;
+            }
+
+            .hero-card {
+                position: relative;
+
+                left: auto;
+                bottom: auto;
+
+                margin: -35px auto 0;
+
+                width: calc(100% - 35px);
+
+                min-width: auto;
+            }
+
+            .section {
+                padding: 55px 0;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+
+            .about-content h2 {
+                font-size: 32px;
+            }
+
+            .cta {
+                margin: 40px 15px;
+
+                padding: 45px 20px;
+            }
+
+            .cta h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =================================================
+     HEADER
+================================================= -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <a href="/" class="logo">
+
+            <div class="logo-icon">
+                🧁
+            </div>
+
+            <div class="logo-text">
+                Sweetie
+            </div>
+
+        </a>
+
+
+        <nav class="menu">
+
+            <a href="/" class="active">
+                Trang chủ
+            </a>
+
+            <a href="/san-pham">
+                Sản phẩm
+            </a>
+
+            <a href="/danh-muc">
+                Danh mục
+            </a>
+
+            <a href="#gioi-thieu">
+                Giới thiệu
+            </a>
+
+            <a href="#lien-he">
+                Liên hệ
+            </a>
+
+        </nav>
+
+
+        <!-- TÌM KIẾM -->
+
+        <form
+            action="/san-pham"
+            method="GET"
+            class="search-box"
+        >
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                name="tuKhoa"
+                placeholder="Tìm kiếm sản phẩm..."
+            >
+
+        </form>
+
+
+        <div class="header-icons">
+
+            <!-- USER -->
+
+            <div class="user-menu">
+
+                <button
+                    type="button"
+                    class="user-btn"
+                >
+                    <i class="fa-regular fa-user"></i>
+                </button>
+
+
+                <div class="user-dropdown">
+
+                    <a href="/don-hang">
+
+                        <i class="fa-solid fa-box"></i>
+
+                        <span>
+                            Đơn hàng của tôi
+                        </span>
+
+                    </a>
+
+
+                    <% if (
+                        typeof nguoiDung !== "undefined" &&
+                        nguoiDung
+                    ) { %>
+
+                        <a href="/dang-xuat">
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                            <span>
+                                Đăng xuất
+                            </span>
+
+                        </a>
+
+                    <% } else { %>
+
+                        <a href="/dang-nhap">
+
+                            <i class="fa-solid fa-right-to-bracket"></i>
+
+                            <span>
+                                Đăng nhập
+                            </span>
+
+                        </a>
+
+                        <a href="/dang-ky">
+
+                            <i class="fa-solid fa-user-plus"></i>
+
+                            <span>
+                                Đăng ký
+                            </span>
+
+                        </a>
+
+                    <% } %>
+
+                </div>
+
+            </div>
+
+
+            <!-- GIỎ HÀNG -->
+
+            <a
+                href="/gio-hang"
+                class="cart-box"
+            >
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span class="cart-count">
+                    0
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =================================================
+     HERO
+================================================= -->
+
+<section class="hero">
+
+    <div class="hero-inner">
+
+        <!-- LEFT -->
+
+        <div class="hero-left">
+
+            <div class="hero-badge">
+                ✨ Bánh ngon mỗi ngày
+            </div>
+
+
+            <h1>
+                Ngọt ngào trong từng
+                <span>khoảnh khắc</span>
+            </h1>
+
+
+            <p>
+                Sweetie mang đến những chiếc bánh thơm ngon,
+                được làm từ nguyên liệu tươi mới và sự chăm chút
+                trong từng chi tiết.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="/san-pham"
+                    class="btn-primary-sweet"
+                >
+
+                    <i class="fa-solid fa-cake-candles me-2"></i>
+
+                    Xem sản phẩm
+
+                </a>
+
+
+                <a
+                    href="/danh-muc"
+                    class="btn-outline-sweet"
+                >
+                    Khám phá danh mục
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT -->
+
+        <div class="hero-right">
+
+            <div class="hero-image-wrapper">
+
+ <img
+    src="/images/bktrangchu.png"
+    class="hero-image"
+    alt="Bánh kem dâu tây Sweetie"
+>
+
+                <div class="hero-card">
+
+                    <div class="hero-rating">
+
+                        <i class="fa-solid fa-star"></i>
+
+                        <strong>
+                            4.9/5
+                        </strong>
+
+                    </div>
+
+                    <p>
+                        Khách hàng yêu thích
+                    </p>
+
+                </div>
+
+
+                <span
+                    class="hero-dot hero-dot-1"
+                ></span>
+
+                <span
+                    class="hero-dot hero-dot-2"
+                ></span>
+
+                <span
+                    class="hero-dot hero-dot-3"
+                ></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =================================================
+     DANH MỤC
+================================================= -->
+
+<section class="section">
+
+    <div class="section-container">
+
+        <div class="section-title">
+
+            <span>
+                Danh mục
+            </span>
+
+            <h2>
+                Khám phá các loại bánh
+            </h2>
+
+            <p>
+                Lựa chọn loại bánh phù hợp cho những
+                khoảnh khắc đặc biệt của bạn.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <% if (
+                typeof danhMucs !== "undefined" &&
+                danhMucs.length > 0
+            ) { %>
+
+                <% danhMucs
+                    .slice(0, 4)
+                    .forEach(function(dm, index) {
+                %>
+
+                    <div class="col-lg-3 col-md-6">
+
+                        <a
+                            href="/san-pham?danhMuc=<%= dm._id %>"
+                            class="category-card"
+                        >
+
+                            <img
+                                src="<%= dm.hinhAnh || [
+                                    'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=85',
+                                    'https://images.unsplash.com/photo-1587668178277-295251f900ce?auto=format&fit=crop&w=700&q=85',
+                                    'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=85',
+                                    'https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=700&q=85'
+                                ][index % 4] %>"
+                                alt="<%= dm.tenDanhMuc %>"
+                            >
+
+                            <div class="category-overlay">
+
+                                <h4>
+                                    <%= dm.tenDanhMuc %>
+                                </h4>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                <% }) %>
+
+            <% } else { %>
+
+
+                <div class="col-lg-3 col-md-6">
+
+                    <a
+                        href="/san-pham"
+                        class="category-card"
+                    >
+
+                        <img
+                            src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=85"
+                            alt="Bánh kem"
+                        >
+
+                        <div class="category-overlay">
+                            <h4>Bánh kem</h4>
+                        </div>
+
+                    </a>
+
+                </div>
+
+
+                <div class="col-lg-3 col-md-6">
+
+                    <a
+                        href="/san-pham"
+                        class="category-card"
+                    >
+
+                        <img
+                            src="https://images.unsplash.com/photo-1587668178277-295251f900ce?auto=format&fit=crop&w=700&q=85"
+                            alt="Cupcake"
+                        >
+
+                        <div class="category-overlay">
+                            <h4>Cupcake</h4>
+                        </div>
+
+                    </a>
+
+                </div>
+
+
+                <div class="col-lg-3 col-md-6">
+
+                    <a
+                        href="/san-pham"
+                        class="category-card"
+                    >
+
+                        <img
+                            src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=85"
+                            alt="Donut"
+                        >
+
+                        <div class="category-overlay">
+                            <h4>Donut</h4>
+                        </div>
+
+                    </a>
+
+                </div>
+
+
+                <div class="col-lg-3 col-md-6">
+
+                    <a
+                        href="/san-pham"
+                        class="category-card"
+                    >
+
+                        <img
+                            src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=700&q=85"
+                            alt="Cheesecake"
+                        >
+
+                        <div class="category-overlay">
+                            <h4>Cheesecake</h4>
+                        </div>
+
+                    </a>
+
+                </div>
+
+            <% } %>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =================================================
+     SẢN PHẨM NỔI BẬT
+================================================= -->
+
+<section class="section products-section">
+
+    <div class="section-container">
+
+        <div class="section-title">
+
+            <span>
+                Sản phẩm nổi bật
+            </span>
+
+            <h2>
+                Những chiếc bánh được yêu thích
+            </h2>
+
+            <p>
+                Những sản phẩm ngọt ngào nổi bật
+                dành cho những khoảnh khắc đặc biệt.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <% if (
+                typeof sanPhams !== "undefined" &&
+                sanPhams.length > 0
+            ) { %>
+
+                <% sanPhams
+                    .slice(0, 8)
+                    .forEach(function(sp) {
+                %>
+
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+
+                        <div class="product-card">
+
+                            <a
+                                href="/san-pham/<%= sp._id %>"
+                            >
+
+                                <img
+                                    src="<%= sp.hinhAnh || 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=85' %>"
+                                    class="product-image"
+                                    alt="<%= sp.tenSanPham %>"
+                                >
+
+                            </a>
+
+
+                            <div class="product-info">
+
+                                <a
+                                    href="/san-pham/<%= sp._id %>"
+                                    class="product-name"
+                                >
+
+                                    <%= sp.tenSanPham %>
+
+                                </a>
+
+
+                                <% if (sp.danhMucId) { %>
+
+                                    <div class="product-category">
+
+                                        <%= sp.danhMucId.tenDanhMuc %>
+
+                                    </div>
+
+                                <% } %>
+
+
+                                <div class="product-price">
+
+                                    <%= Number(sp.gia).toLocaleString("vi-VN") %>đ
+
+                                </div>
+
+
+                                <form
+                                    action="/gio-hang/them/<%= sp._id %>"
+                                    method="POST"
+                                >
+
+                                    <input
+                                        type="hidden"
+                                        name="soLuong"
+                                        value="1"
+                                    >
+
+                                    <button
+                                        type="submit"
+                                        class="btn-cart"
+                                    >
+
+                                        <i class="fa-solid fa-cart-shopping me-2"></i>
+
+                                        Thêm vào giỏ
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            <% } %>
+
+        </div>
+
+
+        <div class="text-center mt-5">
+
+            <a
+                href="/san-pham"
+                class="btn-primary-sweet"
+            >
+
+                Xem tất cả sản phẩm
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =================================================
+     ƯU ĐIỂM
+================================================= -->
+
+<section class="section">
+
+    <div class="section-container">
+
+        <div class="row g-4">
+
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-cake-candles"></i>
+
+                    </div>
+
+                    <h5>
+                        Bánh tươi mỗi ngày
+                    </h5>
+
+                    <p>
+                        Sản phẩm được chuẩn bị mới
+                        để giữ trọn hương vị.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-leaf"></i>
+
+                    </div>
+
+                    <h5>
+                        Nguyên liệu chất lượng
+                    </h5>
+
+                    <p>
+                        Chọn lọc nguyên liệu
+                        tươi ngon và an toàn.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-truck-fast"></i>
+
+                    </div>
+
+                    <h5>
+                        Đặt hàng thuận tiện
+                    </h5>
+
+                    <p>
+                        Quy trình mua hàng
+                        đơn giản và nhanh chóng.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-heart"></i>
+
+                    </div>
+
+                    <h5>
+                        Phục vụ tận tâm
+                    </h5>
+
+                    <p>
+                        Luôn mong muốn mang đến
+                        trải nghiệm tốt nhất.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =================================================
+     GIỚI THIỆU
+================================================= -->
+
+<section
+    class="section about"
+    id="gioi-thieu"
+>
+
+    <div class="section-container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <img
+                    src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1000&q=85"
+                    class="about-image"
+                    alt="Tiệm bánh Sweetie"
+                >
+
+            </div>
+
+
+            <div class="col-lg-6 about-content">
+
+                <span>
+                    Về Sweetie
+                </span>
+
+                <h2>
+                    Nơi tạo nên những chiếc bánh
+                    <span>ngọt ngào</span>
+                </h2>
+
+                <p>
+                    Sweetie là website bán bánh ngọt trực tuyến,
+                    giúp khách hàng dễ dàng tìm kiếm, lựa chọn
+                    và đặt mua những sản phẩm bánh yêu thích.
+                </p>
+
+                <p>
+                    Với mong muốn mang lại trải nghiệm mua sắm
+                    thuận tiện, Sweetie cung cấp nhiều loại bánh
+                    phù hợp cho sinh nhật, tiệc nhỏ và những
+                    dịp đặc biệt.
+                </p>
+
+
+                <a
+                    href="/san-pham"
+                    class="btn-primary-sweet"
+                >
+
+                    Khám phá ngay
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =================================================
+     CTA
+================================================= -->
+
+<section class="cta">
+
+    <h2>
+        Sẵn sàng thưởng thức
+        một chiếc bánh thật ngon?
+    </h2>
+
+    <p>
+        Khám phá những chiếc bánh ngọt ngào
+        dành riêng cho những khoảnh khắc của bạn.
+    </p>
+
+    <a href="/san-pham">
+
+        <i class="fa-solid fa-cake-candles me-2"></i>
+
+        Mua bánh ngay
+
+    </a>
+
+</section>
+
+
+<!-- =================================================
+     FOOTER
+================================================= -->
+
+<footer id="lien-he">
+
+    <div class="section-container">
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <h4>
+                    🧁 Sweetie
+                </h4>
+
+                <p>
+                    Website bán bánh ngọt trực tuyến,
+                    mang những chiếc bánh ngon và
+                    ngọt ngào đến gần bạn hơn.
+                </p>
+
+            </div>
+
+
+            <div class="col-md-2">
+
+                <h5>
+                    Liên kết
+                </h5>
+
+                <p>
+                    <a href="/">
+                        Trang chủ
+                    </a>
+                </p>
+
+                <p>
+                    <a href="/san-pham">
+                        Sản phẩm
+                    </a>
+                </p>
+
+                <p>
+                    <a href="/danh-muc">
+                        Danh mục
+                    </a>
+                </p>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <h5>
+                    Tài khoản
+                </h5>
+
+                <p>
+                    <a href="/dang-nhap">
+                        Đăng nhập
+                    </a>
+                </p>
+
+                <p>
+                    <a href="/dang-ky">
+                        Đăng ký
+                    </a>
+                </p>
+
+                <p>
+                    <a href="/gio-hang">
+                        Giỏ hàng
+                    </a>
+                </p>
+
+                <p>
+                    <a href="/don-hang">
+                        Đơn hàng của tôi
+                    </a>
+                </p>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <h5>
+                    Liên hệ
+                </h5>
+
+                <p>
+                    <i class="fa-solid fa-phone me-2"></i>
+
+                    0123 456 789
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-envelope me-2"></i>
+
+                    sweetie@gmail.com
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-location-dot me-2"></i>
+
+                    Hà Nội, Việt Nam
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 Sweetie -
+            Website bán bánh ngọt trực tuyến
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>

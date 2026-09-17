@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Danh mục - Sweetie</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fff;
+            color: #111827;
+        }
+        /* ================= USER MENU ================= */
+
+.user-menu {
+    position: relative;
+}
+
+.user-btn {
+    border: none;
+    background: transparent;
+    color: #111827;
+    font-size: 27px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.user-btn:hover {
+    color: #ef2b67;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 48px;
+    right: -15px;
+
+    width: 230px;
+
+    background: #fff;
+
+    border: 1px solid #eeeeee;
+    border-radius: 14px;
+
+    padding: 10px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.13);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(8px);
+
+    transition: 0.2s;
+
+    z-index: 9999;
+}
+
+.user-menu:hover .user-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-dropdown::before {
+    content: "";
+
+    position: absolute;
+
+    top: -7px;
+    right: 27px;
+
+    width: 14px;
+    height: 14px;
+
+    background: #fff;
+
+    border-left: 1px solid #eeeeee;
+    border-top: 1px solid #eeeeee;
+
+    transform: rotate(45deg);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background: #fff0f5;
+    color: #ef2b67;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-info strong {
+    display: block;
+    color: #111827;
+    font-size: 14px;
+}
+
+.user-info small {
+    display: block;
+    margin-top: 2px;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+.dropdown-line {
+    height: 1px;
+    background: #eeeeee;
+
+    margin: 5px 0;
+}
+
+.user-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 11px 12px;
+
+    text-decoration: none;
+
+    color: #374151;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.user-dropdown a i {
+    width: 20px;
+
+    color: #6b7280;
+
+    text-align: center;
+}
+
+.user-dropdown a:hover {
+    background: #fff0f5;
+    color: #ef2b67;
+}
+
+.user-dropdown a:hover i {
+    color: #ef2b67;
+}
+
+        /* ================= KHU VỰC ĐẦU TRANG ================= */
+
+.page-top {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8px 20px 10px;
+}
+
+.breadcrumb-custom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    margin-bottom: 5px;
+    color: #94a3b8;
+}
+
+.title-box {
+    max-width: 850px;
+    margin: 0 auto 20px;
+    text-align: center;
+    background: linear-gradient(180deg, #fff7fa 0%, #ffffff 100%);
+    border: 1px solid #f8dbe6;
+    border-radius: 28px;
+    padding: 20px 15px 18px;
+    box-shadow: 0 10px 30px rgba(239, 43, 103, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+.title-box::before {
+    content: "";
+    width: 160px;
+    height: 160px;
+    background: rgba(239, 43, 103, 0.07);
+    border-radius: 50%;
+    position: absolute;
+    top: -55px;
+    left: -35px;
+}
+
+.title-box::after {
+    content: "";
+    width: 120px;
+    height: 120px;
+    background: rgba(239, 43, 103, 0.05);
+    border-radius: 50%;
+    position: absolute;
+    bottom: -35px;
+    right: -25px;
+}
+
+.title-badge {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #ffeaf1;
+    color: #ef2b67;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 2;
+}
+
+.title-box h1 {
+    font-family: "Nunito", "Be Vietnam Pro", sans-serif;
+    font-size: 58px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    color: #0f172a;
+    margin: 0 0 18px;
+    position: relative;
+    z-index: 2;
+}
+
+.title-box h1 span {
+    color: #ef2b67;
+}
+
+.title-box p {
+    font-size: 21px;
+    line-height: 1.8;
+    color: #64748b;
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .title-box {
+        padding: 35px 22px 30px;
+    }
+
+    .title-box h1 {
+        font-size: 42px;
+    }
+
+    .title-box p {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-top {
+        padding: 20px 14px 10px;
+    }
+
+    .breadcrumb-custom {
+        font-size: 14px;
+        margin-bottom: 22px;
+    }
+
+    .title-box {
+        border-radius: 20px;
+        padding: 28px 16px 24px;
+    }
+
+    .title-box h1 {
+        font-size: 32px;
+    }
+
+    .title-box p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .title-badge {
+        font-size: 11px;
+        padding: 8px 14px;
+    }
+}
+        /* ================= HEADER ================= */
+
+.header {
+    height: 82px;
+    background: rgba(255,255,255,0.96);
+    border-bottom: 1px solid #f3e8ed;
+
+    display: flex;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    backdrop-filter: blur(10px);
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+
+    padding: 0 30px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 28px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    text-decoration: none;
+    color: #ef2b67;
+
+    min-width: 250px;
+    flex-shrink: 0;
+}
+
+.logo-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #fff0f5,
+        #ffe4ee
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+
+    box-shadow: 0 6px 18px rgba(239,43,103,0.08);
+}
+
+.logo-text {
+    font-size: 36px;
+    font-weight: 700;
+    font-style: italic;
+
+    white-space: nowrap;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+
+    gap: 28px;
+
+    flex-shrink: 0;
+}
+
+.menu a {
+    position: relative;
+
+    text-decoration: none;
+    color: #111827;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    padding: 30px 0;
+
+    white-space: nowrap;
+
+    transition: 0.2s;
+}
+
+.menu a:hover,
+.menu a.active {
+    color: #ef2b67;
+}
+
+.menu a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 17px;
+
+    height: 2px;
+
+    border-radius: 10px;
+
+    background: #ef2b67;
+}
+
+.search-box {
+    margin-left: auto;
+
+    width: 280px;
+    min-width: 230px;
+
+    height: 48px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 15px;
+
+    background: #fff;
+
+    transition: 0.2s;
+}
+
+.search-box:focus-within {
+    border-color: #f7a6bf;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(239,43,103,0.08);
+}
+
+.search-box i {
+    color: #9ca3af;
+}
+
+.search-box input {
+    flex: 1;
+
+    border: none;
+    outline: none;
+
+    margin-left: 12px;
+
+    font-size: 15px;
+
+    min-width: 0;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+
+    gap: 24px;
+
+    font-size: 25px;
+}
+
+.header-icons a {
+    color: #111827;
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.header-icons a:hover {
+    color: #ef2b67;
+    transform: translateY(-2px);
+}
+
+      /* ================= MAIN ================= */
+
+.main {
+    max-width: 1400px;
+
+    margin: auto;
+
+    padding:
+        34px
+        30px
+        90px;
+}
+
+/* Breadcrumb */
+.breadcrumb-custom {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #9ca3af;
+
+    font-size: 14px;
+
+    margin-bottom: 35px;
+}
+
+.breadcrumb-custom a {
+    text-decoration: none;
+    color: #6b7280;
+
+    transition: 0.2s;
+}
+
+.breadcrumb-custom a:hover {
+    color: #ef2b67;
+}
+
+.breadcrumb-custom span {
+    margin: 0 5px;
+    color: #cbd5e1;
+}
+
+/* TITLE */
+.title-box {
+    position: relative;
+
+    text-align: center;
+
+    max-width: 800px;
+
+    margin:
+        0 auto
+        55px;
+}
+
+.title-box::before {
+    content: "";
+
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: #fff0f5;
+
+    top: -25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: -1;
+}
+
+.title-box span {
+    display: inline-block;
+
+    color: #ef2b67;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+}
+
+.title-box h1 {
+    font-size: 44px;
+
+    font-weight: 800;
+
+    margin: 0 0 13px;
+
+    letter-spacing: -0.8px;
+}
+
+.title-box p {
+    color: #6b7280;
+
+    font-size: 17px;
+    line-height: 1.7;
+
+    max-width: 650px;
+
+    margin: auto;
+}
+
+       /* ================= CATEGORY CARD ================= */
+
+.category-card {
+    position: relative;
+
+    background: #fff;
+
+    border: 1px solid #f0e7eb;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    height: 100%;
+
+    transition: 0.3s ease;
+
+    box-shadow:
+        0 8px 25px
+        rgba(17, 24, 39, 0.05);
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+
+    border-color: #ffd0df;
+
+    box-shadow:
+        0 20px 45px
+        rgba(239,43,103,0.12);
+}
+
+.category-image {
+    width: 100%;
+    height: 260px;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.45s ease,
+        filter 0.45s ease;
+}
+
+.category-card:hover .category-image {
+    transform: scale(1.06);
+
+    filter: brightness(0.96);
+}
+
+.category-content {
+    position: relative;
+
+    padding: 26px 24px 27px;
+
+    text-align: center;
+
+    background: #fff;
+}
+
+.category-content::before {
+    content: "🧁";
+
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    background: #fff0f5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    top: -25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    border: 4px solid white;
+
+    font-size: 20px;
+
+    box-shadow:
+        0 6px 15px
+        rgba(239,43,103,0.12);
+}
+
+.category-name {
+    font-size: 22px;
+    font-weight: 750;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    color: #111827;
+}
+
+.category-description {
+    color: #6b7280;
+
+    min-height: 52px;
+
+    line-height: 1.65;
+
+    margin-bottom: 20px;
+
+    font-size: 15px;
+}
+
+.btn-category {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f22969,
+            #ef477f
+        );
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 12px 23px;
+
+    border-radius: 10px;
+
+    font-weight: 650;
+
+    box-shadow:
+        0 9px 20px
+        rgba(239,43,103,0.18);
+
+    transition: 0.25s;
+}
+
+.btn-category:hover {
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 13px 25px
+        rgba(239,43,103,0.25);
+}
+
+.btn-category i {
+    transition: 0.25s;
+}
+
+.btn-category:hover i {
+    transform: translateX(4px);
+}
+footer {
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #171f30
+        );
+
+    color: #fff;
+
+    padding: 58px 0 22px;
+}
+
+footer h4 {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+footer h5 {
+    font-size: 17px;
+    font-weight: 650;
+
+    margin-bottom: 18px;
+}
+
+footer p {
+    line-height: 1.7;
+}
+
+footer a {
+    color: #cbd5e1;
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+footer a:hover {
+    color: #f75b91;
+}
+
+.footer-bottom {
+    text-align: center;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    margin-top: 35px;
+    padding-top: 22px;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+}
+        @media (max-width: 992px) {
+            .menu,
+            .search-box {
+                display: none;
+            }
+
+            .header-inner {
+                justify-content: space-between;
+            }
+
+            .logo {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-inner">
+
+        <!-- LOGO -->
+        <a href="/" class="logo">
+            <div class="logo-icon">🧁</div>
+            <div class="logo-text">Sweetie</div>
+        </a>
+
+        <!-- MENU -->
+        <nav class="menu">
+            <a href="/">Trang chủ</a>
+            <a href="/san-pham">Sản phẩm</a>
+            <a href="/danh-muc" class="active">Danh mục</a>
+            <a href="/#gioi-thieu">Giới thiệu</a>
+            <a href="/#lien-he">Liên hệ</a>
+        </nav>
+
+        <!-- TÌM KIẾM -->
+        <form action="/san-pham" method="GET" class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                name="tuKhoa"
+                placeholder="Tìm kiếm sản phẩm..."
+            >
+        </form>
+
+        <!-- ICON -->
+        <div class="header-icons">
+
+            <!-- TÀI KHOẢN -->
+            <div class="user-menu">
+
+    <button type="button" class="user-btn">
+        <i class="fa-regular fa-user"></i>
+    </button>
+
+    <div class="user-dropdown">
+
+        <% if (nguoiDung) { %>
+
+            <div class="user-info">
+
+                <div class="user-avatar">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        <%= nguoiDung.hoTen %>
+                    </strong>
+
+                    <small>
+                        Tài khoản của tôi
+                    </small>
+                </div>
+
+            </div>
+
+            <div class="dropdown-line"></div>
+
+            <a href="/don-hang">
+                <i class="fa-solid fa-box"></i>
+                Đơn hàng của tôi
+            </a>
+
+            <a href="/dang-xuat">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Đăng xuất
+            </a>
+
+        <% } else { %>
+
+            <a href="/dang-nhap">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Đăng nhập
+            </a>
+
+            <a href="/dang-ky">
+                <i class="fa-solid fa-user-plus"></i>
+                Đăng ký
+            </a>
+
+        <% } %>
+
+    </div>
+
+</div>
+            <!-- GIỎ HÀNG -->
+            <a href="/gio-hang" class="cart-box">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+
+        </div>
+
+    </div>
+</header>
+
+
+<main class="main">
+
+    <div class="page-top">
+    <div class="breadcrumb-custom">
+        <a href="/">Trang chủ</a>
+        <span>›</span>
+        <strong>Danh mục</strong>
+    </div>
+
+    <div class="title-box">
+        <div class="title-badge">Sweetie Bakery</div>
+        <h1>Danh mục bánh</h1>
+        <p>
+            Khám phá các loại bánh ngọt tại Sweetie và lựa chọn sản phẩm phù hợp
+            cho những dịp đặc biệt của bạn.
+        </p>
+    </div>
+</div>
+    <div class="row g-4">
+
+        <% if (danhMucs && danhMucs.length > 0) { %>
+
+            <% danhMucs.forEach(function(dm, index) { %>
+
+               <div class="col-xl-3 col-lg-4 col-md-6">
+
+                    <div class="category-card">
+
+                        <img
+                            src="<%= dm.hinhAnh || [
+                                'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=80',
+                                'https://images.unsplash.com/photo-1587668178277-295251f900ce?auto=format&fit=crop&w=700&q=80',
+                                'https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=700&q=80',
+                                'https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?auto=format&fit=crop&w=700&q=80'
+                            ][index % 4] %>"
+                            alt="<%= dm.tenDanhMuc %>"
+                            class="category-image"
+                        >
+
+                        <div class="category-content">
+
+                            <div class="category-name">
+                                <%= dm.tenDanhMuc %>
+                            </div>
+
+                            <div class="category-description">
+                                <%= dm.moTa || "Khám phá những sản phẩm thơm ngon thuộc danh mục này." %>
+                            </div>
+
+                            <a
+                                href="/san-pham?danhMuc=<%= dm._id %>"
+                                class="btn-category"
+                            >
+                                Xem sản phẩm
+                                <i class="fa-solid fa-arrow-right ms-2"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        <% } else { %>
+
+            <div class="col-12">
+
+                <div class="empty-box">
+
+                    <i class="fa-solid fa-cake-candles"></i>
+
+                    <h4>Chưa có danh mục</h4>
+
+                    <p>
+                        Hiện tại cơ sở dữ liệu chưa có danh mục bánh.
+                    </p>
+
+                    <a
+                        href="/"
+                        class="btn-category"
+                    >
+                        Quay lại trang chủ
+                    </a>
+
+                </div>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+</main>
+
+
+<footer id="lien-he">
+
+    <div class="footer-container">
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <h4 style="color:#f75b91;">
+                    🧁 Sweetie
+                </h4>
+
+                <p>
+                    Website bán bánh ngọt trực tuyến với nhiều loại
+                    bánh thơm ngon và hấp dẫn.
+                </p>
+
+            </div>
+
+
+            <div class="col-md-2">
+
+                <h5>Liên kết</h5>
+
+                <p><a href="/">Trang chủ</a></p>
+                <p><a href="/san-pham">Sản phẩm</a></p>
+                <p><a href="/danh-muc">Danh mục</a></p>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <h5>Tài khoản</h5>
+
+                <p><a href="/dang-nhap">Đăng nhập</a></p>
+                <p><a href="/dang-ky">Đăng ký</a></p>
+                <p><a href="/gio-hang">Giỏ hàng</a></p>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <h5>Liên hệ</h5>
+
+                <p>
+                    <i class="fa-solid fa-phone me-2"></i>
+                    0123 456 789
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-envelope me-2"></i>
+                    sweetie@gmail.com
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+            © 2026 Sweetie - Website bán bánh ngọt trực tuyến
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>

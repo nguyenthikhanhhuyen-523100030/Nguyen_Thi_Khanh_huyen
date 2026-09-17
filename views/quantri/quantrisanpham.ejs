@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quản lý sản phẩm - Sweetie Admin</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8f9fb;
+            color: #111827;
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background: #1f2631;
+            color: white;
+            padding: 25px 14px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 16px 35px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            color: #ff759b;
+        }
+
+        .logo-name {
+            font-size: 30px;
+            font-weight: 700;
+            font-style: italic;
+            color: #ff759b;
+        }
+
+        .logo-admin {
+            font-size: 18px;
+        }
+
+        .menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-item {
+            margin-bottom: 8px;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 17px 18px;
+            color: #e5e7eb;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 17px;
+        }
+
+        .menu-link i {
+            width: 28px;
+            text-align: center;
+            font-size: 21px;
+        }
+
+        .menu-link:hover,
+        .menu-link.active {
+            background: linear-gradient(90deg, #9d3767, #9f426d);
+            color: #fff;
+        }
+
+        .sidebar-line {
+            border-top: 1px solid #4b5563;
+            margin: 25px 10px;
+        }
+
+        /* MAIN */
+        .main {
+            margin-left: 280px;
+            width: calc(100% - 280px);
+        }
+
+        .topbar {
+            height: 70px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 32px;
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 17px;
+        }
+
+        .admin-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .content {
+            padding: 32px 35px;
+        }
+
+        .page-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .page-title {
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+            font-size: 18px;
+        }
+
+        .btn-add {
+            background: linear-gradient(90deg, #f32769, #f13979);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            padding: 14px 22px;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .btn-add:hover {
+            color: #fff;
+            opacity: .92;
+        }
+
+        /* FILTER */
+        .filter-row {
+            display: grid;
+            grid-template-columns: 1fr 330px;
+            gap: 20px;
+            margin-bottom: 22px;
+        }
+
+        .search-box {
+            height: 52px;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+        }
+
+        .search-box input {
+            width: 100%;
+            border: none;
+            outline: none;
+            margin-left: 12px;
+            font-size: 16px;
+        }
+
+        .filter-select {
+            height: 52px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 0 15px;
+            background: #fff;
+            font-size: 16px;
+        }
+
+        /* TABLE */
+        .table-box {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            background: #fafafa;
+            border: none;
+            padding: 16px;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .table tbody td {
+            vertical-align: middle;
+            padding: 14px 16px;
+            border-color: #eee;
+        }
+
+        .product-img {
+            width: 90px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 7px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status-on {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-off {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .action-btn {
+            border: none;
+            background: transparent;
+            font-size: 19px;
+            margin-right: 12px;
+        }
+
+        .edit-btn {
+            color: #6b7280;
+        }
+
+        .delete-btn {
+            color: #ef4444;
+        }
+
+        .footer-table {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0 0;
+            color: #6b7280;
+        }
+
+        @media (max-width: 1000px) {
+            .sidebar {
+                width: 220px;
+            }
+
+            .main {
+                margin-left: 220px;
+                width: calc(100% - 220px);
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">🧁</div>
+            <div class="logo-name">Sweetie</div>
+            <div class="logo-admin">Admin</div>
+        </div>
+
+        <ul class="menu">
+
+            <li class="menu-item">
+                <a href="/quan-tri" class="menu-link">
+                    <i class="fa-solid fa-house"></i>
+                    Tổng quan
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/quan-tri/san-pham" class="menu-link active">
+                    <i class="fa-solid fa-cube"></i>
+                    Quản lý sản phẩm
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/quan-tri/danh-muc" class="menu-link">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Quản lý danh mục
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/quan-tri/don-hang" class="menu-link">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    Quản lý đơn hàng
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="sidebar-line"></div>
+
+        <ul class="menu">
+            <li class="menu-item">
+                <a href="/dang-xuat" class="menu-link">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Đăng xuất
+                </a>
+            </li>
+        </ul>
+
+    </aside>
+
+
+    <div class="main">
+
+        <div class="topbar">
+
+            <div class="admin-user">
+
+                <div class="admin-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <span>
+                    <%= typeof nguoiDung !== "undefined" && nguoiDung
+                        ? nguoiDung.hoTen
+                        : "Admin"
+                    %>
+                </span>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+        </div>
+
+
+        <div class="content">
+
+            <div class="page-head">
+
+                <div>
+                    <h1 class="page-title">
+                        Quản lý sản phẩm
+                    </h1>
+
+                    <div class="page-subtitle">
+                        Thêm, sửa, xóa sản phẩm bánh trong cửa hàng.
+                    </div>
+                </div>
+
+                <a href="/quan-tri/san-pham/them" class="btn-add">
+                    <i class="fa-solid fa-plus me-2"></i>
+                    Thêm sản phẩm
+                </a>
+
+            </div>
+
+
+            <form method="GET" action="/quan-tri/san-pham" class="filter-row">
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        name="tuKhoa"
+                        value="<%= typeof tuKhoa !== 'undefined' ? tuKhoa : '' %>"
+                        placeholder="Tìm tên sản phẩm..."
+                    >
+                </div>
+
+                <select name="danhMuc" class="filter-select" onchange="this.form.submit()">
+
+                    <option value="">
+                        Tất cả danh mục
+                    </option>
+
+                    <% danhMucs.forEach(function(dm) { %>
+
+                        <option
+                            value="<%= dm._id %>"
+                            <%= typeof danhMuc !== "undefined" &&
+                                danhMuc == dm._id.toString()
+                                ? "selected"
+                                : ""
+                            %>
+                        >
+                            <%= dm.tenDanhMuc %>
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+            </form>
+
+
+            <div class="table-box">
+
+                <div class="table-responsive">
+
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Hình ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Danh mục</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <% if (sanPhams && sanPhams.length > 0) { %>
+
+                                <% sanPhams.forEach(function(sp, index) { %>
+
+                                    <tr>
+
+                                        <td>
+                                            <%= index + 1 %>
+                                        </td>
+
+                                        <td>
+                                            <img
+                                                src="<%= sp.hinhAnh || 'https://via.placeholder.com/120x80?text=Banh' %>"
+                                                class="product-img"
+                                                alt="<%= sp.tenSanPham %>"
+                                            >
+                                        </td>
+
+                                        <td>
+                                            <%= sp.tenSanPham %>
+                                        </td>
+
+                                        <td>
+                                            <%= sp.gia.toLocaleString("vi-VN") %>đ
+                                        </td>
+
+                                        <td>
+                                            <%= sp.danhMucId
+                                                ? sp.danhMucId.tenDanhMuc
+                                                : "Chưa phân loại"
+                                            %>
+                                        </td>
+
+                                        <td>
+
+                                            <% if (sp.trangThai) { %>
+
+                                                <span class="status status-on">
+                                                    Còn hàng
+                                                </span>
+
+                                            <% } else { %>
+
+                                                <span class="status status-off">
+                                                    Hết hàng
+                                                </span>
+
+                                            <% } %>
+
+                                        </td>
+
+                                        <td>
+
+                                            <a
+                                                href="/quan-tri/san-pham/sua/<%= sp._id %>"
+                                                class="action-btn edit-btn"
+                                                title="Sửa"
+                                            >
+                                                <i class="fa-solid fa-pen"></i>
+                                            </a>
+
+                                            <form
+                                                action="/quan-tri/san-pham/xoa/<%= sp._id %>"
+                                                method="POST"
+                                                style="display:inline;"
+                                                onsubmit="return confirm('Bạn có chắc muốn xóa sản phẩm này?')"
+                                            >
+
+                                                <button
+                                                    type="submit"
+                                                    class="action-btn delete-btn"
+                                                    title="Xóa"
+                                                >
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
+
+                                            </form>
+
+                                        </td>
+
+                                    </tr>
+
+                                <% }) %>
+
+                            <% } else { %>
+
+                                <tr>
+                                    <td colspan="7" class="text-center py-4">
+                                        Chưa có sản phẩm.
+                                    </td>
+                                </tr>
+
+                            <% } %>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-table">
+
+                <div>
+                    Hiển thị
+                    <%= sanPhams.length %>
+                    sản phẩm
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

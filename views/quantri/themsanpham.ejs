@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Thêm sản phẩm - Sweetie Admin</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8f9fb;
+            color: #111827;
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #1f2631;
+            color: white;
+            padding: 25px 14px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 16px 35px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            color: #ff759b;
+        }
+
+        .logo-name {
+            font-size: 30px;
+            font-weight: 700;
+            font-style: italic;
+            color: #ff759b;
+        }
+
+        .logo-admin {
+            font-size: 18px;
+        }
+
+        .menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-item {
+            margin-bottom: 8px;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 17px 18px;
+            color: #e5e7eb;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 17px;
+        }
+
+        .menu-link i {
+            width: 28px;
+            text-align: center;
+            font-size: 21px;
+        }
+
+        .menu-link:hover,
+        .menu-link.active {
+            background: linear-gradient(90deg, #9d3767, #9f426d);
+            color: #fff;
+        }
+
+        .sidebar-line {
+            border-top: 1px solid #4b5563;
+            margin: 25px 10px;
+        }
+
+        .main {
+            margin-left: 280px;
+            width: calc(100% - 280px);
+        }
+
+        .topbar {
+            height: 70px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 32px;
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 17px;
+        }
+
+        .admin-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content {
+            padding: 32px 35px 60px;
+        }
+
+        .page-title {
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .form-box {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 900px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-control,
+        .form-select {
+            height: 50px;
+            border-radius: 8px;
+        }
+
+        textarea.form-control {
+            height: 120px;
+            resize: none;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #ef2b67;
+            box-shadow: 0 0 0 3px rgba(239, 43, 103, 0.08);
+        }
+
+        .btn-save {
+            background: linear-gradient(90deg, #f32769, #f13979);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 13px 24px;
+            font-weight: 600;
+        }
+
+        .btn-cancel {
+            margin-left: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px 22px;
+            text-decoration: none;
+            color: #111827;
+        }
+
+        @media (max-width: 1000px) {
+            .sidebar {
+                width: 220px;
+            }
+
+            .main {
+                margin-left: 220px;
+                width: calc(100% - 220px);
+            }
+        }
+    </style>
+</head>
+<script>
+function xemTruocAnh(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById("previewImage");
+
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+    } else {
+        preview.src = "";
+        preview.style.display = "none";
+    }
+}
+</script>
+<body>
+
+<div class="admin-layout">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">🧁</div>
+            <div class="logo-name">Sweetie</div>
+            <div class="logo-admin">Admin</div>
+        </div>
+
+        <ul class="menu">
+
+            <li class="menu-item">
+                <a href="/quan-tri" class="menu-link">
+                    <i class="fa-solid fa-house"></i>
+                    Tổng quan
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/quan-tri/san-pham" class="menu-link active">
+                    <i class="fa-solid fa-cube"></i>
+                    Quản lý sản phẩm
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/quan-tri/danh-muc" class="menu-link">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Quản lý danh mục
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/quan-tri/don-hang" class="menu-link">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    Quản lý đơn hàng
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="sidebar-line"></div>
+
+        <ul class="menu">
+            <li class="menu-item">
+                <a href="/dang-xuat" class="menu-link">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Đăng xuất
+                </a>
+            </li>
+        </ul>
+
+    </aside>
+
+
+    <div class="main">
+
+        <div class="topbar">
+            <div class="admin-user">
+                <div class="admin-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <span>Admin</span>
+            </div>
+        </div>
+
+
+        <div class="content">
+
+            <h1 class="page-title">
+                Thêm sản phẩm
+            </h1>
+
+            <div class="page-subtitle">
+                Thêm sản phẩm mới vào cửa hàng.
+            </div>
+
+
+            <div class="form-box">
+
+             <form
+    action="/quan-tri/san-pham/them"
+    method="POST"
+    enctype="multipart/form-data"
+>
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Tên sản phẩm
+                        </label>
+
+                        <input
+                            type="text"
+                            name="tenSanPham"
+                            class="form-control"
+                            placeholder="Nhập tên sản phẩm"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Danh mục
+                        </label>
+
+                        <select
+                            name="danhMucId"
+                            class="form-select"
+                            required
+                        >
+
+                            <option value="">
+                                Chọn danh mục
+                            </option>
+
+                            <% danhMucs.forEach(function(dm) { %>
+
+                                <option value="<%= dm._id %>">
+                                    <%= dm.tenDanhMuc %>
+                                </option>
+
+                            <% }) %>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Giá
+                        </label>
+
+                        <input
+                            type="number"
+                            name="gia"
+                            class="form-control"
+                            min="0"
+                            placeholder="Nhập giá sản phẩm"
+                            required
+                        >
+
+                    </div>
+
+
+                   <div class="mb-3">
+    <label class="form-label">
+        Hình ảnh sản phẩm
+    </label>
+
+    <input
+        type="file"
+        name="hinhAnh"
+        class="form-control"
+        accept=".jpg,.jpeg,.png,.webp"
+        onchange="xemTruocAnh(event)"
+    >
+
+    <div class="mt-3">
+        <img
+            id="previewImage"
+            style="
+                display: none;
+                width: 220px;
+                height: 160px;
+                object-fit: cover;
+                border-radius: 10px;
+                border: 1px solid #e5e7eb;
+            "
+        >
+    </div>
+</div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Mô tả
+                        </label>
+
+                        <textarea
+                            name="moTa"
+                            class="form-control"
+                            placeholder="Nhập mô tả sản phẩm"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Trạng thái
+                        </label>
+
+                        <select
+                            name="trangThai"
+                            class="form-select"
+                        >
+
+                            <option value="true">
+                                Còn hàng
+                            </option>
+
+                            <option value="false">
+                                Hết hàng
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn-save"
+                    >
+                        <i class="fa-solid fa-floppy-disk me-2"></i>
+                        Lưu sản phẩm
+                    </button>
+
+
+                    <a
+                        href="/quan-tri/san-pham"
+                        class="btn-cancel"
+                    >
+                        Hủy
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
